@@ -1,1 +1,1 @@
-# stock-market-platform-cs
+# Stock Talk 📈
