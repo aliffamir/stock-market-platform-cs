@@ -1,4 +1,4 @@
-namespace api.Dtos;
+namespace api.Dtos.Stock;
 
 public class StockDto
 {
