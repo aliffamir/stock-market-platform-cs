@@ -16,6 +16,7 @@ public static class StockMapper
             LastDividend = stockModel.LastDividend,
             Industry = stockModel.Industry,
             MarketCap = stockModel.MarketCap,
+            Comments = stockModel.Comments.Select(comment => comment.ToCommentDto()).ToList()
         };
     }
 
