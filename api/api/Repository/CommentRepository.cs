@@ -1,4 +1,5 @@
 using api.Data;
+using api.Dtos.Comment;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,21 @@ public class CommentRepository : ICommentRepository
     {
         return await _context.Comments.FindAsync(id);
     }
-    
-    
+
+    public async Task<Comment?> CreateAsync(Comment commentModel)
+    {
+        await _context.Comments.AddAsync(commentModel);
+        await _context.SaveChangesAsync();
+        return commentModel;
+    }
+
+    public Task<Comment?> UpdateAsync(int commentId, UpdateCommentRequestDto commentModel)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Comment?> DeleteAsync(int commentId)
+    {
+        throw new NotImplementedException();
+    }
 }
