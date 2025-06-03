@@ -32,9 +32,19 @@ public class CommentRepository : ICommentRepository
         return commentModel;
     }
 
-    public Task<Comment?> UpdateAsync(int commentId, UpdateCommentRequestDto commentModel)
+    public async Task<Comment?> UpdateAsync(int commentId, UpdateCommentRequestDto commentDto)
     {
-        throw new NotImplementedException();
+        var commentModel = await _context.Comments.FirstOrDefaultAsync(comment => comment.Id == commentId);
+        if (commentModel == null)
+        {
+            return null;
+        }
+
+        commentModel.Title = commentDto.Title;
+        commentModel.Content = commentDto.Content;
+        await _context.SaveChangesAsync();
+
+        return commentModel;
     }
 
     public Task<Comment?> DeleteAsync(int commentId)
