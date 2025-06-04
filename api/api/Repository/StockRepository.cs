@@ -39,7 +39,12 @@ public class StockRepository : IStockRepository
                     : stocks.OrderBy(stock => stock.Symbol);
             }
         }
-        return await stocks.ToListAsync();
+
+        var skipNumber = (query.PageNumber - 1) * query.PageSize;
+        // Here we are using Offset pagination - may have shortcomings with queries that return large amounts of data
+        // see (https://learn.microsoft.com/en-us/ef/core/querying/pagination)
+        // consider using Keyset pagination
+        return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
     }
 
     public async Task<Stock?> GetByIdAsync(int id)
