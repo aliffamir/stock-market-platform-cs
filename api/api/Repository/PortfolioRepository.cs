@@ -25,6 +25,14 @@ public class PortfolioRepository : IPortfolioRepository
             Purchase = stock.Stock.Purchase,
             MarketCap = stock.Stock.MarketCap,
             Industry = stock.Stock.Industry,
+            Comments = stock.Stock.Comments
         }).ToListAsync();
+    }
+
+    public async Task<Portfolio> CreateAsync(Portfolio portfolioModel)
+    {
+        await _context.Portfolios.AddAsync(portfolioModel);
+        await _context.SaveChangesAsync();
+        return portfolioModel;
     }
 }
